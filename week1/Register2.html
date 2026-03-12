@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Example</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-4">
+    <div class="card p-4 shadow">
+      <h1 class="mb-4 text-center">Registration Page</h1>
+      <form name="register" method="post" onsubmit="return validateForm()">
+        <table class="table">
+          <tr>
+            <td>User Name:</td>
+            <td><input type="text" class="form-control" name="uname" required minlength="3"></td>
+          </tr>
+          <tr>
+            <td>Password:</td>
+            <td><input type="password" class="form-control" name="pwd" required minlength="6"></td>
+          </tr>
+          <tr>
+            <td>E-mail:</td>
+            <td><input type="email" class="form-control" name="email" required></td>
+          </tr>
+          <tr>
+            <td>Phone Number:</td>
+            <td><input type="text" class="form-control" name="phno" maxlength="10" pattern="[0-9]{10}" required></td>
+          </tr>
+          <tr>
+            <td>Gender:</td>
+            <td>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" name="gender" value="Male" required>
+                <label class="form-check-label">Male</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" name="gender" value="Female">
+                <label class="form-check-label">Female</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Date Of Birth:</td>
+            <td><input type="date" class="form-control" name="dob" required></td>
+          </tr>
+          <tr>
+            <td>Languages Known:</td>
+            <td>
+              <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" name="chkEng"> English
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" name="chkHin"> Hindi
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" name="chkTel"> Telugu
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" name="chkTam"> Tamil
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>State:</td>
+            <td>
+              <select class="form-select" name="states" required>
+                <option value="">Select State</option>
+                <option value="Telangana">Telangana</option>
+                <option value="AP">Andhra Pradesh</option>
+                <option value="MP">Madhya Pradesh</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Tamilnadu">Tamil Nadu</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>District:</td>
+            <td>
+              <select class="form-select" name="dist" required>
+                <option value="">Select District</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Warangal">Warangal</option>
+                <option value="RangaReddy">Ranga Reddy</option>
+                <option value="Karimnagar">Karimnagar</option>
+                <option value="Nalgonda">Nalgonda</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Address:</td>
+            <td><textarea class="form-control" rows="4" name="txtAddress" required minlength="10"></textarea></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-center">
+              <input type="submit" class="btn btn-primary" value="Register">
+              <input type="reset" class="btn btn-secondary" value="Reset">
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Your existing validation function remains unchanged
+    function validateForm() {
+      let uname = document.register.uname.value.trim();
+      let pwd = document.register.pwd.value.trim();
+      let phno = document.register.phno.value.trim();
+      let dob = document.register.dob.value;
+      let address = document.register.txtAddress.value.trim();
+
+      if (uname.length < 3) { alert("Username must be at least 3 characters long."); return false; }
+      if (pwd.length < 6) { alert("Password must be at least 6 characters long."); return false; }
+      if (!/^\d{10}$/.test(phno)) { alert("Phone number must be exactly 10 digits."); return false; }
+      let today = new Date(); let birthDate = new Date(dob);
+      if (birthDate > today) { alert("Date of Birth cannot be in the future."); return false; }
+      if (!document.register.chkEng.checked && !document.register.chkHin.checked && !document.register.chkTel.checked && !document.register.chkTam.checked) {
+        alert("Please select at least one language."); return false;
+      }
+      if (address.length < 10) { alert("Address must be at least 10 characters long."); return false; }
+      return true;
+    }
+  </script>
+</body>
+</html>
